@@ -41,3 +41,25 @@ html {
   font-size: 2rem;
   padding: 1rem;
 }
+
+/* Footer */
+
+footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.social {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+}
+
+.social-button>a {
+  color: var(--primary-text);
+}

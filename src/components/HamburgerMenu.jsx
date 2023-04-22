@@ -14,6 +14,7 @@ const HamburgerMenu = () => {
         <nav className="nav">
           <button className="hamburger-button" onClick={toggleMenu}><FaRegWindowClose /></button>
           <ul className="nav-ul">
+            <li><a className="nav-a" href="/">Home</a></li>
             <li><a className="nav-a" href="/about">About</a></li>
             <li><a className="nav-a" href="/projects">Projects</a></li>
           </ul>

@@ -6,7 +6,9 @@ function App() {
   return (
     <div className="main-container">
       <HamburgerMenu />
-      <h1 className='hero-text'>I write code</h1> 
+      <main className='hero'>
+        <h1 className='hero-text'>I write code</h1> 
+      </main>
       <Footer />
     </div>
   );

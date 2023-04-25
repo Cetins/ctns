@@ -81,8 +81,7 @@ h2 span {
 .text {
   font-size: 1.2rem;
   line-height: 2.5rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
+  margin: 2.5rem 5rem;
 }
 
 .centered-md-title { 
@@ -131,7 +130,6 @@ footer {
 .education-cards {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: space-around;
 }
 
@@ -241,7 +239,7 @@ footer {
   font-size: 1.2rem;
   color: var(--primary-text);
 }
-.row {
+/* .row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -253,7 +251,7 @@ footer {
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
-}
+} */
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
@@ -309,17 +307,7 @@ footer {
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-  .education-cards {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .flip-card {
-    width: 40rem;
-    height: 25rem;
-  }
-}
+@media only screen and (min-width: 600px) {}
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {}
@@ -340,6 +328,16 @@ footer {
   
   .project-brief {
     max-width: 80vw;
+  }
+
+  .education-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .flip-card {
+    width: 40rem;
+    height: 25rem;
   }
   
 }

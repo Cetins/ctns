@@ -13,7 +13,7 @@ const Experience = () => {
               <h2>Nail Solutions</h2>
               <h3>Entrepreneur, Business Owner</h3>
               <h4>Glasgow, UK</h4>
-              <h5>SEP 2014 - MAY 2022</h5>
+              <h5>SEP 2015 - MAY 2022</h5>
             </div>
             <div class="flip-card-back">
               <h4>Relatable Skills</h4>

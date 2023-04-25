@@ -173,6 +173,64 @@ footer {
   margin-top: 2rem;
 }
 
+/* Projects page styles */
+
+.project-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.project-image {
+  max-width: 65vw;
+  max-height: auto;
+  width: auto;
+  height: auto;
+}
+
+
+.project-brief {
+  max-width: 30vw;
+  margin-left: 2rem;
+}
+
+.project-brief>h2, .project-brief>h3, .project-brief>h4 {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.project-brief>p {
+  margin: 3px;
+  line-height: 1.8rem;
+}
+
+.repository-link {
+  display: flex;
+  gap: 1rem;
+  font-size: 1rem;
+  color: var(--primary-text);
+  margin-top: 1rem;
+}
+
+.github-icon {
+  vertical-align: middle;
+  font-size: 1.2rem;
+  color: var(--primary-text);
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
@@ -202,4 +260,47 @@ footer {
     height: 23rem;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
   }
+
+  .project-card {
+    max-width: 100vw;
+  }
+
+  .project-brief>h2, .project-brief>h3, .project-brief>h4 {
+    font-size: 1rem;
+  }
+
+  .project-brief>p {
+    font-size: .9rem;
+    max-width: 100vw;
+  }
+
+  .project-brief {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (max-width: 1200px) {
+  .project-card {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .project-image {
+    max-width: 80vw;
+    height: auto;
+  }
+  
+  .project-brief {
+    max-width: 80vw;
+  }
+  
 }

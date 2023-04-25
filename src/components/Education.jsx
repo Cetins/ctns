@@ -4,7 +4,7 @@ const Education = () => {
   return (
     <div>
       <header>
-        <h3 className='centered-md-title'>Education</h3>
+        <h2 className='subtitle'><span>Education</span></h2>
       </header>
       <main className='education-cards'>
         <section class="flip-card">

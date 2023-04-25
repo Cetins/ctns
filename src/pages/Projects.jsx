@@ -5,31 +5,30 @@ const Projects = () => {
   return (
     <article className='main-content'>
         <header>
-            <h2 className='subtitle'>Projects</h2>
+          <h2 className='subtitle'><span>Projects</span></h2>
         </header>
-        <main>
-            <section className='project-card row'>
-              <div className='column'>
+        <main className='centered-main'>
+            <section className='project-card'>
+              <div>
                 <img className='project-image' src="images/sales.png" alt="Sales Tracker"/>
               </div>
-              <div className='column'>
+              <div>
                 <div className='project-brief'>
                   <h2>Sales Tracker</h2>
                   <h3>Javascript | React | MongoDB</h3>
                   <h4>Open Source Project | Solo</h4>
-                  <p>Inspired by my own experiences as a small business owner, it's been a joy to see it develop and grow, and I'm excited about the ways it can simplify and improve people's lives. </p>
-                  <p>As an open source project, I'm hopeful that it will be a valuable resource for developers and individuals alike.</p>
-                  <p>For more technical details, please visit the repository link and check out the README for the latest updates.</p>
+                  <p>Solving a real life problem, experienced in first hand, Sales Tracker is so far my favorite project to work on.</p>
+                  <p>It is a CRM application where users can store their sales and see live reports. With consideration of user experience, application requires minimal input from the user. It's simple yet elegantly mines the sales data not just for financial reports but also tracks the product stock at the meantime.</p>
                   <a className='repository-link' href="https://github.com/Cetins/sale-tracker-client"><AiFillGithub className='github-icon'/>Project Repository</a>
                 </div>
               </div>
             </section>
 
-            <section className='project-card row'>
-              <div className='column'>
+            <section className='project-card'>
+              <div>
                 <img className='project-image' src="images/codebnb.png" alt="CodeBNB"/>
               </div>
-              <div className='column'>
+              <div>
                 <div className='project-brief'>
                   <h2>CodeBNB</h2>
                   <h3>Javascript | React | MongoDB | Java</h3>
@@ -41,11 +40,11 @@ const Projects = () => {
               </div>
             </section>
 
-            <section className='project-card row'>
-              <div className='column'>
+            <section className='project-card'>
+              <div>
                 <img className='project-image' src="images/demonclan.png" alt="Demon Clan"/>
               </div>
-              <div className='column'>
+              <div>
                 <div className='project-brief'>
                   <h2>Demon Clan</h2>
                   <h3>Java | Spring | Jnuit</h3>
@@ -57,11 +56,11 @@ const Projects = () => {
               </div>
             </section>
             
-            <section className='project-card row'>
-              <div className='column'>
+            <section className='project-card'>
+              <div>
                 <img className='project-image' src="images/gymmy.png" alt="Gymmy"/>
               </div>
-              <div className='column'>
+              <div>
                 <div className='project-brief'>
                   <h2>Gymmy</h2>
                   <h3>Python | Flask | SQL</h3>

@@ -1,8 +1,8 @@
 :root {
-  --background-color: red;
+  --background-color: rgb(245, 245, 245);
   --primary-text: black;
   --secondary-text: gray;
-  --accent-color: green;
+  --accent-color: rgb(31, 37, 40);
 }
 
 html,
@@ -162,6 +162,7 @@ footer {
   display: flex;
   flex-direction: column;
   background-color: var(--accent-color);
+  color: var(--secondary-text);
   transform: rotateY(180deg);
 }
 

@@ -236,7 +236,7 @@ footer {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .nav-a { font-size: 1.2rem; }
-  .hero-text { font-size: 7rem; }
+  .hero-text { font-size: 5rem; }
   footer>p { font-size: .8rem;}
   .social-button { 
     font-size: 1.6rem;
@@ -276,7 +276,8 @@ footer {
   }
 
   .project-brief {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    margin-left: 0;
   }
 }
 

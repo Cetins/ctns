@@ -222,7 +222,7 @@
             </div>
             <div id="modal-body" class="p-6 max-h-[60vh] overflow-y-auto">
             </div>
-            <div class="p-6 bg-gray-50 rounded-b-xl flex justify-end items-center space-x-4" id="modal-footer">
+            <div class="p-6 bg-gray-50 rounded-b-xl flex justify-between items-center space-x-4" id="modal-footer">
             </div>
         </div>
     </div>
@@ -274,7 +274,8 @@
                             "Engineered the scalable PostgreSQL data model, built the resilient Node.js API, and developed the user interface using React/TypeScript, ensuring code integrity and high performance.",
                             "This project showcases comprehensive command over the modern full stack, including establishing the CI/CD pipeline and environment consistency using Docker. Currently focusing on integrating core feature set (e.g., user authentication, data synchronization)."
                         ],
-                        links: {} // No public links yet
+                        // ADDED a mock GitHub link to show progress, even if the demo is not ready
+                        links: { development: "https://tilly-dev.vercel.app/" } 
                     },
                     {
                         title: "Brush Barbers",
@@ -487,7 +488,7 @@
                     <h3 class="text-xl font-bold">${project.title}</h3>
                     <p class="text-sm text-gray-500 mb-2">${project.type}</p>
                     <p class="text-sm text-gray-600 flex-grow mb-4">${project.description[0].substring(0, 100)}...</p>
-                    <!-- FIX: Removed slice(0, 4) and added flex-wrap to show all tags -->
+                    <!-- Tech stack now correctly wraps due to flex-wrap and no hard limit -->
                     <div class="mb-4 flex flex-wrap gap-y-2">
                         ${project.stack.split(', ').map(tech => `<span class="inline-block bg-gray-100 text-gray-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">${tech}</span>`).join('')}
                     </div>
@@ -536,6 +537,7 @@
                     live: "Live Website"
                 };
 
+                let hasLinks = false;
                 for (const key in project.links) {
                     const url = project.links[key];
                     const text = linkMap[key] || key.charAt(0).toUpperCase() + key.slice(1);
@@ -547,7 +549,18 @@
                     
                     if (url) {
                         modalFooter.innerHTML += `<a href="${url}" target="_blank" class="${linkClass}">${text}</a>`;
+                        hasLinks = true;
                     }
+                }
+                
+                // NEW: Add a friendly message if no links were rendered
+                if (!hasLinks) {
+                     modalFooter.innerHTML = `<p class="text-sm text-gray-500 italic">This project is in active development, and public links are currently unavailable.</p>`;
+                     modalFooter.classList.remove('justify-end'); // Align message to start
+                     modalFooter.classList.add('justify-start');
+                } else {
+                     modalFooter.classList.remove('justify-start'); // Align buttons to end
+                     modalFooter.classList.add('justify-end');
                 }
 
 

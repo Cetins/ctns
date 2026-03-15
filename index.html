@@ -151,22 +151,39 @@
         <!-- Main Content -->
         <main class="flex-1 p-6 sm:p-10">
             <div id="overview" class="content-section active">
-                 <h2 class="text-3xl font-bold mb-4">Professional Overview</h2>
-                 <p class="text-gray-600 mb-8 leading-relaxed max-w-4xl">
-                    This section provides a snapshot of my professional profile. Below is a summary of my technical focus and a visualization of my core competencies. My goal is to leverage a strong foundation in modern web technologies to contribute to impactful projects, focusing on delivering high-quality, responsive, and scalable applications.
-                </p>
+                 <h2 class="text-3xl font-bold mb-4">Hi, I'm Sezen</h2>
                 <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
                     <div class="lg:col-span-3 bg-white p-8 rounded-xl shadow-sm border border-gray-200/80">
                         <h3 class="font-bold text-xl mb-4 text-[#1E40AF]">Summary</h3>
                         <p class="text-gray-700 leading-relaxed">
-                            Highly motivated Junior Full-Stack Developer with proven ability to translate complex requirements into functional code using **JavaScript/TypeScript, React, Node.js, Python (Django/Flask), and SQL/NoSQL databases**. Experienced in **Agile** environments and **open-source collaboration**, currently contributing to production-level sales and inventory tracking software. Seeking a challenging remote role to drive impactful project delivery.
-                        </p>
+                            I came to programming the unconventional way — through Harvard's CS50, then CodeClan's intensive bootcamp (SCQF Level 8), after years of running my own business and teaching myself whatever technical skills I needed along the way. That instinct — spotting a problem and figuring out how to solve it — is what drew me to development in the first place.
+                        </p><br/>
+                        <p class="text-gray-700 leading-relaxed mt-4">
+                            Right now I'm building Tilly, an open-source web app I designed and deployed independently to help small businesses manage sales, stock and commissions. It's built with Next.js, TypeScript, Express and Supabase. I also manage the full digital presence for a Glasgow barbershop — website, booking system, marketing and admin. 
+                        </p><br/>
+                        <p class="text-gray-700 leading-relaxed mt-4">
+                            I'm looking for a hybrid junior full-stack role in Glasgow where I can bring this self-sufficiency into a real team environment for the first time.
+                            </p><br/>
                     </div>
                     <div class="lg:col-span-2">
                         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200/80">
-                            <h3 class="font-bold text-xl text-center mb-4 text-[#1E40AF]">Core Competencies</h3>
-                            <div class="chart-container">
-                                <canvas id="skillsChart"></canvas>
+                            <h3 class="font-bold text-xl text-center mb-4 text-[#1E40AF]">Core Skills</h3>
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200/80">
+                                <ul>
+                                    <li class="text-sm text-gray-600 mt-4">TypeScript</li>
+                                    <li class="text-sm text-gray-600 mt-4">React</li>
+                                    <li class="text-sm text-gray-600 mt-4">Next.js</li>
+                                    <li class="text-sm text-gray-600 mt-4">Node.js</li>
+                                    <li class="text-sm text-gray-600 mt-4">Python</li>
+                                    <li class="text-sm text-gray-600 mt-4">Flask</li>
+                                    <li class="text-sm text-gray-600 mt-4">Java</li>
+                                    <li class="text-sm text-gray-600 mt-4">MongoDB</li>
+                                    <li class="text-sm text-gray-600 mt-4">PostgreSQL</li>
+                                    <li class="text-sm text-gray-600 mt-4">Supabase</li>
+                                    <li class="text-sm text-gray-600 mt-4">Docker</li>
+                                    <li class="text-sm text-gray-600 mt-4">Git</li>
+                                    <li class="text-sm text-gray-600 mt-4">HTML/CSS</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -410,33 +427,6 @@
                     pointHoverBorderColor: 'rgba(30, 64, 175, 1)'
                 }]
             };
-
-            const skillsChartCtx = document.getElementById('skillsChart').getContext('2d');
-            new Chart(skillsChartCtx, {
-                type: 'radar',
-                data: skillsData,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        r: {
-                            angleLines: { color: '#DBEAFE' }, /* Light Blue */
-                            grid: { color: '#DBEAFE' }, /* Light Blue */
-                            pointLabels: { font: { size: 14 }, color: '#1F2937' },
-                            ticks: {
-                                backdropColor: '#F9FAFB',
-                                color: '#4B5563',
-                                stepSize: 20
-                            },
-                             min: 0,
-                             max: 100
-                        }
-                    },
-                    plugins: {
-                        legend: { display: false }
-                    }
-                }
-            });
 
             const timelineNav = document.getElementById('timeline-nav');
             const experienceDetails = document.getElementById('experience-details');

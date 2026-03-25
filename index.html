@@ -3,586 +3,637 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sezen Cetin - Junior Full-Stack Developer</title>
+    <title>Sezen Cetin — Junior Full-Stack Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Corporate Blue -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg:        #0f0f0f;
+            --bg2:       #161616;
+            --bg3:       #1e1e1e;
+            --border:    #2a2a2a;
+            --text:      #e8e4dc;
+            --muted:     #888070;
+            --amber:     #f59e0b;
+            --amber-dim: #78490a;
+            --amber-glow:rgba(245,158,11,0.08);
+        }
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F9FAFB; /* Light Cool Gray/Off-White */
-            color: #1F2937; /* Dark Gray Text */
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        h1, h2 { font-family: 'DM Serif Display', serif; }
+        code, .mono { font-family: 'DM Mono', monospace; }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--bg2);
+            border-right: 1px solid var(--border);
+            width: 260px;
+            flex-shrink: 0;
         }
         .nav-link {
-            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            margin-bottom: 2px;
+            gap: 10px;
         }
-        .nav-link.active {
-            background-color: #DBEAFE; /* Light Blue */
-            color: #1E40AF; /* Primary Blue Accent */
-            font-weight: 700;
+        .nav-link:hover { color: var(--text); background: var(--bg3); }
+        .nav-link.active { color: var(--amber); background: var(--amber-glow); }
+        .nav-link.active svg { stroke: var(--amber); }
+
+        /* Sections */
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+
+        /* Cards */
+        .card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: border-color 0.2s;
         }
-        .nav-link:not(.active):hover {
-            background-color: #EFF6FF; /* Very Light Blue */
+        .card:hover { border-color: #3a3a3a; }
+
+        /* Skill tags */
+        .skill-tag {
+            display: inline-block;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--amber);
+            font-family: 'DM Mono', monospace;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin: 3px;
         }
-        .content-section {
-            display: none;
+
+        /* Timeline nav */
+        .timeline-btn {
+            text-align: left;
+            padding: 14px 16px;
+            border-radius: 10px;
+            width: 100%;
+            border: 1px solid var(--border);
+            background: var(--bg2);
+            color: var(--text);
+            transition: all 0.2s;
+            cursor: pointer;
         }
-        .content-section.active {
-            display: block;
+        .timeline-btn:hover { border-color: #3a3a3a; background: var(--bg3); }
+        .timeline-btn.active { border-color: var(--amber-dim); background: var(--amber-glow); }
+        .timeline-btn.active .role-name { color: var(--amber); }
+
+        /* Amber accent line */
+        .amber-line {
+            display: inline-block;
+            width: 32px;
+            height: 3px;
+            background: var(--amber);
+            border-radius: 2px;
+            margin-bottom: 12px;
         }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -30px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: #DBEAFE; /* Light Blue */
-            border: 4px solid #1E40AF; /* Primary Blue Accent */
+
+        /* Project cards */
+        .project-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.2s, transform 0.2s;
         }
-        .timeline-line {
-            position: absolute;
-            left: -21px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background-color: #DBEAFE; /* Light Blue */
+        .project-card:hover { border-color: var(--amber-dim); transform: translateY(-2px); }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--amber);
+            color: #0f0f0f;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: opacity 0.2s;
+            display: inline-block;
         }
-         .modal-backdrop {
-            transition: opacity 0.3s ease;
+        .btn-primary:hover { opacity: 0.85; }
+        .btn-ghost {
+            color: var(--muted);
+            font-size: 13px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        .btn-ghost:hover { color: var(--text); border-color: #3a3a3a; }
+
+        /* Modal */
+        .modal-backdrop {
+            transition: opacity 0.25s ease;
+            background: rgba(0,0,0,0.7);
         }
         .modal-content {
-            transition: transform 0.3s ease;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: transform 0.25s ease;
         }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 40vh;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
-        .hamburger-icon {
-            display: none;
-        }
+
+        /* Mobile */
         @media (max-width: 768px) {
-            .hamburger-icon {
-                display: block;
-            }
             .sidebar {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease-in-out;
+                position: fixed;
+                inset-y: 0;
+                left: 0;
                 z-index: 40;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
             }
-            .sidebar.open {
-                transform: translateX(0);
-            }
+            .sidebar.open { transform: translateX(0); }
         }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+        /* Fade in */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .content-section.active > * {
+            animation: fadeUp 0.35s ease both;
+        }
+        .content-section.active > *:nth-child(2) { animation-delay: 0.05s; }
+        .content-section.active > *:nth-child(3) { animation-delay: 0.10s; }
+        .content-section.active > *:nth-child(4) { animation-delay: 0.15s; }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <div id="app-container" class="min-h-screen md:flex">
+<div class="min-h-screen md:flex">
 
-        <!-- Mobile Header -->
-        <div class="md:hidden bg-white/80 backdrop-blur-sm border-b border-gray-200/80 p-4 flex justify-between items-center sticky top-0 z-30">
-            <h1 class="text-xl font-bold text-[#1E40AF]">Sezen Cetin</h1>
-            <button id="hamburger-btn" class="hamburger-icon z-50">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4"/></svg>
-            </button>
-        </div>
-        
-        <!-- Sidebar -->
-        <aside id="sidebar" class="sidebar fixed inset-y-0 left-0 bg-white w-64 p-6 border-r border-gray-200/80 flex-shrink-0 md:relative md:translate-x-0">
-            <div class="text-center md:text-left">
-                <h1 class="text-2xl font-bold text-[#1E40AF]">Sezen Cetin</h1>
-                <p class="text-sm text-gray-500 mt-1">Junior Full-Stack Developer</p>
-            </div>
-
-            <nav class="mt-10">
-                <a href="#overview" class="nav-link active flex items-center p-3 my-2 rounded-lg">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                    Overview
-                </a>
-                <a href="#experience" class="nav-link flex items-center p-3 my-2 rounded-lg">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    Experience
-                </a>
-                <a href="#projects" class="nav-link flex items-center p-3 my-2 rounded-lg">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-                    Projects & Portfolio
-                </a>
-                <a href="#education" class="nav-link flex items-center p-3 my-2 rounded-lg">
-                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-9.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"/></svg>
-                    Education
-                </a>
-            </nav>
-
-            <div class="mt-auto pt-10">
-                <p class="text-sm font-semibold mb-2">Get in Touch</p>
-                <div class="space-y-3">
-                    <a href="mailto:cetinsdev@gmail.com" class="flex items-center text-sm text-gray-600 hover:text-[#1E40AF]">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                        cetinsdev@gmail.com
-                    </a>
-                    <a href="https://linkedin.com/in/cetins" target="_blank" class="flex items-center text-sm text-gray-600 hover:text-[#1E40AF]">
-                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                        LinkedIn
-                    </a>
-                    <a href="https://github.com/Cetins" target="_blank" class="flex items-center text-sm text-gray-600 hover:text-[#1E40AF]">
-                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                        GitHub
-                    </a>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="flex-1 p-6 sm:p-10">
-            <div id="overview" class="content-section active">
-                 <h2 class="text-3xl font-bold mb-4">Hi, I'm Sezen</h2>
-                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-                    <div class="lg:col-span-3 bg-white p-8 rounded-xl shadow-sm border border-gray-200/80">
-                        <h3 class="font-bold text-xl mb-4 text-[#1E40AF]">Summary</h3>
-                        <p class="text-gray-700 leading-relaxed">
-                            I came to programming the unconventional way — through Harvard's CS50, then CodeClan's intensive bootcamp (SCQF Level 8), after years of running my own business and teaching myself whatever technical skills I needed along the way. That instinct — spotting a problem and figuring out how to solve it — is what drew me to development in the first place.
-                        </p><br/>
-                        <p class="text-gray-700 leading-relaxed mt-4">
-                            Right now I'm building Tilly, an open-source web app I designed and deployed independently to help small businesses manage sales, stock and commissions. It's built with Next.js, TypeScript, Express and Supabase. I also manage the full digital presence for a Glasgow barbershop — website, booking system, marketing and admin. 
-                        </p><br/>
-                        <p class="text-gray-700 leading-relaxed mt-4">
-                            I'm looking for a hybrid junior full-stack role in Glasgow where I can bring this self-sufficiency into a real team environment for the first time.
-                            </p><br/>
-                    </div>
-                    <div class="lg:col-span-2">
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200/80">
-                            <h3 class="font-bold text-xl text-center mb-4 text-[#1E40AF]">Core Skills</h3>
-                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200/80">
-                                <ul>
-                                    <li class="text-sm text-gray-600 mt-4">TypeScript</li>
-                                    <li class="text-sm text-gray-600 mt-4">React</li>
-                                    <li class="text-sm text-gray-600 mt-4">Next.js</li>
-                                    <li class="text-sm text-gray-600 mt-4">Node.js</li>
-                                    <li class="text-sm text-gray-600 mt-4">Python</li>
-                                    <li class="text-sm text-gray-600 mt-4">Flask</li>
-                                    <li class="text-sm text-gray-600 mt-4">Java</li>
-                                    <li class="text-sm text-gray-600 mt-4">MongoDB</li>
-                                    <li class="text-sm text-gray-600 mt-4">PostgreSQL</li>
-                                    <li class="text-sm text-gray-600 mt-4">Supabase</li>
-                                    <li class="text-sm text-gray-600 mt-4">Docker</li>
-                                    <li class="text-sm text-gray-600 mt-4">Git</li>
-                                    <li class="text-sm text-gray-600 mt-4">HTML/CSS</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="experience" class="content-section">
-                <h2 class="text-3xl font-bold mb-4">Professional Experience</h2>
-                <p class="text-gray-600 mb-12 leading-relaxed max-w-4xl">
-                    Here is an interactive timeline of my professional journey. It highlights my transition into tech and showcases my experience in both software development and web management. Click on each role to see the key responsibilities and achievements associated with it.
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="md:col-span-1">
-                        <ul id="timeline-nav" class="space-y-4">
-                        </ul>
-                    </div>
-                    <div id="experience-details" class="md:col-span-2 bg-white p-8 rounded-xl shadow-sm border border-gray-200/80 min-h-[300px]">
-                    </div>
-                </div>
-            </div>
-
-            <div id="projects" class="content-section">
-                <h2 class="text-3xl font-bold mb-4">Selected Projects & Portfolio Work</h2>
-                <p class="text-gray-600 mb-8 leading-relaxed max-w-4xl">
-                    This gallery contains a selection of my key projects, demonstrating my ability to build full-stack applications both independently and in collaboration with a team, as well as showcasing my digital strategy and design execution skills. Click 'View Details' on any project to learn more about its implementation.
-                </p>
-                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                </div>
-            </div>
-
-            <div id="education" class="content-section">
-                <h2 class="text-3xl font-bold mb-4">Education & Certification</h2>
-                <p class="text-gray-600 mb-8 leading-relaxed max-w-4xl">
-                    My formal education and certifications have provided me with a robust foundation in both software development principles and analytical thinking. This background supports my technical skills and enhances my ability to approach complex problems methodically.
-                </p>
-                <div id="education-list" class="space-y-6">
-                </div>
-            </div>
-        </main>
+    <!-- Mobile header -->
+    <div class="md:hidden sticky top-0 z-30 flex justify-between items-center px-5 py-4 border-b"
+         style="background:var(--bg2);border-color:var(--border)">
+        <span style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--amber)">Sezen Cetin</span>
+        <button id="hamburger-btn">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
     </div>
 
-    <!-- Project Modal -->
-    <div id="project-modal" class="modal-backdrop fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden opacity-0">
-        <div class="modal-content bg-white rounded-xl shadow-2xl w-full max-w-2xl transform scale-95">
-            <div class="p-6 border-b">
-                <div class="flex justify-between items-start">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar flex flex-col p-6">
+        <div class="mb-8">
+            <h1 style="font-size:22px;color:var(--text);line-height:1.2">Sezen Cetin</h1>
+            <p style="font-size:13px;color:var(--muted);margin-top:4px">Junior Full-Stack Developer</p>
+            <div class="amber-line" style="margin-top:12px;margin-bottom:0"></div>
+        </div>
+
+        <nav class="flex-1">
+            <a href="#overview" class="nav-link active">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                Overview
+            </a>
+            <a href="#experience" class="nav-link">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                Experience
+            </a>
+            <a href="#projects" class="nav-link">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                Projects
+            </a>
+            <a href="#education" class="nav-link">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"/></svg>
+                Education
+            </a>
+        </nav>
+
+        <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:20px">
+            <p style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:12px">Get in touch</p>
+            <div style="display:flex;flex-direction:column;gap:10px">
+                <a href="mailto:cetinsdev@gmail.com" style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);transition:color 0.2s" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    cetinsdev@gmail.com
+                </a>
+                <a href="https://cetins.vercel.app" target="_blank" style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);transition:color 0.2s" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/></svg>
+                    cetins.vercel.app
+                </a>
+                <a href="https://linkedin.com/in/cetins" target="_blank" style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);transition:color 0.2s" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/Cetins" target="_blank" style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);transition:color 0.2s" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 p-6 sm:p-10 overflow-y-auto">
+
+        <!-- OVERVIEW -->
+        <div id="overview" class="content-section active">
+            <div class="amber-line"></div>
+            <h2 style="font-size:32px;margin-bottom:8px">Hi, I'm Sezen</h2>
+            <p style="color:var(--muted);font-size:15px;margin-bottom:32px">Glasgow, UK · Open to hybrid junior roles</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                <div class="lg:col-span-3 card">
+                    <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);margin-bottom:16px">About me</h3>
+                    <p style="color:var(--text);line-height:1.8;font-size:15px">
+                        I came to programming the unconventional way — through Harvard's CS50, then CodeClan's intensive bootcamp (SCQF Level 8), after years of running my own business and teaching myself whatever technical skills I needed along the way. That instinct — spotting a problem and figuring out how to solve it — is what drew me to development in the first place.
+                    </p>
+                    <p style="color:var(--text);line-height:1.8;font-size:15px;margin-top:14px">
+                        Right now I'm building <a href="https://tilly-dev.vercel.app" target="_blank" style="color:var(--amber);text-decoration:underline;text-underline-offset:3px">Tilly</a>, an open-source web app I designed and deployed independently to help small businesses manage sales, stock and commissions. It's built with Next.js, TypeScript, Express and Supabase. I also manage the full digital presence for a Glasgow barbershop — website, booking system, marketing and bookkeeping.
+                    </p>
+                    <p style="color:var(--text);line-height:1.8;font-size:15px;margin-top:14px">
+                        I'm looking for a hybrid junior full-stack role in Glasgow where I can bring this self-sufficiency into a real team environment for the first time.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-2 card">
+                    <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);margin-bottom:16px">Core skills</h3>
                     <div>
-                        <h3 id="modal-title" class="text-2xl font-bold"></h3>
-                        <p id="modal-stack" class="text-sm text-gray-500 mt-1"></p>
+                        <p style="font-size:11px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em">Daily use</p>
+                        <div style="margin-bottom:16px">
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Next.js</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                        </div>
+                        <p style="font-size:11px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em">Also worked with</p>
+                        <div>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Flask</span>
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">Spring</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Supabase</span>
+                        </div>
                     </div>
-                    <button id="modal-close-btn" class="text-gray-400 hover:text-gray-700">&times;</button>
                 </div>
             </div>
-            <div id="modal-body" class="p-6 max-h-[60vh] overflow-y-auto">
-            </div>
-            <div class="p-6 bg-gray-50 rounded-b-xl flex justify-between items-center space-x-4" id="modal-footer">
+        </div>
+
+        <!-- EXPERIENCE -->
+        <div id="experience" class="content-section">
+            <div class="amber-line"></div>
+            <h2 style="font-size:32px;margin-bottom:8px">Experience</h2>
+            <p style="color:var(--muted);font-size:15px;margin-bottom:32px">My path to development — and the work that got me here.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-1">
+                    <ul id="timeline-nav" class="space-y-3"></ul>
+                </div>
+                <div id="experience-details" class="md:col-span-2 card min-h-64"></div>
             </div>
         </div>
+
+        <!-- PROJECTS -->
+        <div id="projects" class="content-section">
+            <div class="amber-line"></div>
+            <h2 style="font-size:32px;margin-bottom:8px">Projects</h2>
+            <p style="color:var(--muted);font-size:15px;margin-bottom:32px">Things I've built — solo, in groups, and for real businesses.</p>
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div id="education" class="content-section">
+            <div class="amber-line"></div>
+            <h2 style="font-size:32px;margin-bottom:8px">Education</h2>
+            <p style="color:var(--muted);font-size:15px;margin-bottom:32px">Where I got the foundations — and where I fell in love with programming.</p>
+            <div id="education-list" class="space-y-5"></div>
+        </div>
+
+    </main>
+</div>
+
+<!-- Modal -->
+<div id="project-modal" class="modal-backdrop fixed inset-0 flex items-center justify-center p-4 hidden opacity-0" style="z-index:50">
+    <div class="modal-content w-full max-w-2xl transform scale-95">
+        <div class="p-6" style="border-bottom:1px solid var(--border)">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h3 id="modal-title" style="font-family:'DM Serif Display',serif;font-size:22px"></h3>
+                    <p id="modal-stack" style="font-size:13px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace"></p>
+                </div>
+                <button id="modal-close-btn" style="color:var(--muted);font-size:24px;line-height:1;padding:4px 8px;transition:color 0.2s" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">&times;</button>
+            </div>
+        </div>
+        <div id="modal-body" class="p-6" style="max-height:55vh;overflow-y:auto"></div>
+        <div id="modal-footer" class="p-6 flex flex-wrap gap-3 items-center" style="border-top:1px solid var(--border)"></div>
     </div>
+</div>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            const cvData = {
-                experience: [
-                    {
-                        role: "Open Source Software Developer",
-                        company: "Tilly Business Software",
-                        period: "Oct 2025 – Present",
-                        details: [
-                            "Engineered high-performance, responsive front-end components using React and TypeScript (Next.js) for a multi-functional open-source web application.",
-                            "Integrated the front-end application with diverse backend RESTful APIs, managing complex state and asynchronous data flow.",
-                            "Drove feature development focusing on data clarity and usability, collaborating with open-source contributors on UI/UX design and accessibility.",
-                            "Managed code deployment and environment setup using version control and Docker principles."
-                        ]
-                    },
-                    {
-                        role: "Part-time Web & Admin Support",
-                        company: "Brush Barbers",
-                        period: "May 2025 – Present",
-                        details: [
-                            "Maintained and optimized the client-facing website and integrated booking system (Wix), ensuring 99.9% uptime and a seamless user experience.",
-                            "Implemented digital updates and performed proactive troubleshooting to resolve technical issues promptly, enhancing system reliability."
-                        ]
-                    },
-                    {
-                        role: "Entrepreneur & Digital Manager",
-                        company: "Nail Solutions",
-                        period: "2014 – 2022",
-                        details: [
-                            "Founded and successfully managed a customer-focused business, demonstrating strong organizational, financial, and client-management skills.",
-                            "Designed and maintained digital assets, including official websites built on WordPress and Wix, to manage online presence and drive bookings.",
-                            "Enhanced digital customer interaction by streamlining the online booking process, improving client retention and service efficiency."
-                        ]
-                    }
+    const data = {
+        experience: [
+            {
+                role: "Founder & Solo Developer",
+                company: "Tilly (Personal Open-Source Project)",
+                period: "Oct 2025 – Present",
+                details: [
+                    "Independently designed and built a full-stack business management web app from scratch to help small businesses track sales, stock, and commissions.",
+                    "Tech stack: Next.js, TypeScript, Express.js, Supabase (PostgreSQL), Docker — deployed live on Vercel.",
+                    "Managed the project end-to-end: architecture decisions, database design, deployment pipeline, issue tracking, and UI/UX.",
+                    "Public GitHub repo with Apache-2.0 licence and Docker Compose for local development."
                 ],
-                projects: [
-                     {
-                        title: "Tilly",
-                        type: "Open Source Platform - In Development",
-                        stack: "JS, TypeScript, React, Node.js, PostgreSQL, Docker",
-                        description: [
-                            "Solo Technical Lead and Architect for this ongoing, full-stack open-source application. I am solely responsible for the project's entire lifecycle, from conceptual planning and architectural design to coding and deployment.",
-                            "Engineered the scalable PostgreSQL data model, built the resilient Node.js API, and developed the user interface using React/TypeScript, ensuring code integrity and high performance.",
-                            "This project showcases comprehensive command over the modern full stack, including establishing the CI/CD pipeline and environment consistency using Docker. Currently focusing on integrating core feature set (e.g., user authentication, data synchronization)."
-                        ],
-                        // ADDED a mock GitHub link to show progress, even if the demo is not ready
-                        links: { development: "https://tilly-dev.vercel.app/" } 
-                    },
-                    {
-                        title: "Brush Barbers",
-                        type: "Digital Strategy & Platform Management",
-                        stack: "Wix Platform, Google SEO, Photoshop, AI Tools",
-                        description: [
-                            "Led the end-to-end digital presence redesign for a client, focusing on operational efficiency and online visibility. Executed comprehensive Google SEO optimization, ensuring all site elements were fully indexable and driving organic search performance.",
-                            "Developed a bespoke, template-free theme tailored to client specifications, utilizing Photoshop for precise visual asset editing and AI for generating high-quality editorial copy.",
-                            "Successfully configured and deployed the Wix booking system, streamlining client scheduling. The project delivered a 100% client-satisfied outcome, demonstrating strong delivery, design, and platform management skills."
-                        ],
-                        links: {
-                             live: "https://www.brushbarbers.com/" // Placeholder/Assumed Live Link
-                        }
-                    },
-                    {
-                        title: "Code BNB",
-                        type: "Capstone Project",
-                        stack: "JavaScript, React, Java (Spring), SQL (H2), Auth0, Heroku",
-                        description: [
-                            "Full-Stack implementation of an Airbnb-style hosting and booking platform, covering user registration, property management, and review systems.",
-                            "Implemented robust user authentication and authorization using Auth0 and secured RESTful APIs built in Java/Spring Boot.",
-                            "Architected the SQL database schema and managed data persistence for property listings, bookings, and user accounts."
-                        ],
-                        links: {
-                            frontend: "https://github.com/Cetins/bnb-front-end",
-                            backend: "https://github.com/Cetins/bnb-back-end"
-                        }
-                    },
-                    {
-                        title: "Gymmy",
-                        type: "Solo Project",
-                        stack: "Python, Flask, SQL, HTML, CSS",
-                        description: [
-                            "Developed a CRUD application for local gym management, enabling staff to efficiently track members, manage classes, and handle real-time bookings.",
-                            "Utilized Python with the Flask framework to handle server-side logic and integrated with a relational SQL database for data management."
-                        ],
-                        links: {
-                            github: "https://github.com/Cetins/gymmy"
-                        }
-                    },
-                     {
-                        title: "Hello World",
-                        type: "Group Project",
-                        stack: "JavaScript, React, MongoDB, HTML, CSS",
-                        description: [
-                            "Contributed to a full-stack quiz module featuring real-time scoreboard updates and interactive world map functionality.",
-                            "Led the implementation of front-end styling and user interactivity, ensuring a smooth and engaging UI/UX."
-                        ],
-                        links: {
-                            github: "https://github.com/elainag/React_Full_Stack_Group_Project"
-                        }
-                    },
-                     {
-                        title: "Sales Tracker",
-                        type: "Solo Project",
-                        stack: "JavaScript, React, MongoDB, HTML, CSS",
-                        description: [
-                            "A personal project to practice React fundamentals and front-end development by building a sales tracking app with live database integration using MongoDB.",
-                            "Features include adding, editing, and deleting sales records with real-time updates to the user interface."
-                        ],
-                        links: {
-                            frontend: "https://github.com/Cetins/sale-tracker-client",
-                            backend: "https://github.com/Cetins/sale-tracker-client",
-                        }
-                    }
+                links: { "Live site": "https://tilly-dev.vercel.app", "GitHub": "https://github.com/Cetins/tilly" }
+            },
+            {
+                role: "Freelance Web Developer & Digital Manager",
+                company: "Brush Barbers, Glasgow",
+                period: "May 2025 – Present",
+                details: [
+                    "Built the business website from scratch on Wix and continue to develop and maintain it.",
+                    "Manage the online booking system end-to-end — configuration, updates, and troubleshooting.",
+                    "Run digital marketing across social media: content creation and campaign management.",
+                    "Handle bookkeeping and day-to-day business administration."
                 ],
-                education: [
-                    {
-                        institution: "CodeClan",
-                        degree: "Professional Software Development (SQA Level 8)",
-                        period: "May 2022 – Sep 2022",
-                        description: "Immersive, full-time program focused on full-stack development best practices, Agile methodology, and collaborative project delivery."
-                    },
-                    {
-                        institution: "Harvard University",
-                        degree: "CS50: Introduction to Computer Science",
-                        period: "Aug 2020 – Dec 2020",
-                        description: "Covered programming fundamentals, algorithms, data structures, and computational thinking using C, Python, and SQL."
-                    },
-                    {
-                        institution: "Istanbul University",
-                        degree: "BA Modern Greek Language & Literature",
-                        period: "Sep 2000 – Jun 2007",
-                        description: "Developed strong research, analytical, and advanced communication skills."
-                    }
-                ]
-            };
-            
-            const navLinks = document.querySelectorAll('.nav-link');
-            const contentSections = document.querySelectorAll('.content-section');
-            const sidebar = document.getElementById('sidebar');
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            
-            const navigateToSection = (hash) => {
-                navLinks.forEach(link => {
-                    link.classList.toggle('active', link.hash === hash);
-                });
-                contentSections.forEach(section => {
-                    section.classList.toggle('active', `#${section.id}` === hash);
-                });
-                if (window.innerWidth < 768) {
-                    sidebar.classList.remove('open');
-                }
-            };
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetHash = e.currentTarget.hash;
-                    navigateToSection(targetHash);
-                    window.history.pushState(null, null, targetHash);
-                });
-            });
+                links: { "Live site": "https://www.brushbarbers.com" }
+            },
+            {
+                role: "Founder & Owner",
+                company: "Nail Solutions, Glasgow",
+                period: "Sep 2014 – May 2022",
+                details: [
+                    "Founded and ran a client-facing business for 8 years, developing strong communication, operations, and business management skills.",
+                    "Designed and maintained websites using WordPress and Wix; managed booking systems and digital marketing.",
+                    "Consistently self-taught new technical skills — photography, Photoshop, web development — to solve real business problems."
+                ],
+                links: {}
+            },
+            {
+                role: "International Sales Representative",
+                company: "Yufa Jewelry, Istanbul",
+                period: "May 2012 – Oct 2014",
+                details: [
+                    "Expanded scope to cover all international regions, managing the full client portfolio.",
+                    "Full accountability for supplier accounts — coordinating between Bangkok factory and Istanbul suppliers, managing stock control using Mikro ERP.",
+                    "Continued producing professional product photography and Photoshop-edited digital catalogues."
+                ],
+                links: {}
+            },
+            {
+                role: "Greece Sales Representative",
+                company: "BR Marsel Jewelry, Istanbul",
+                period: "Jun 2008 – Apr 2012",
+                details: [
+                    "Identified a gap: overseas client orders depended entirely on in-person visits or trade expos, making frequent ordering slow and expensive.",
+                    "Self-taught professional lighting technique and Photoshop to produce high-quality digital jewellery catalogues distributed by email — replacing costly printed catalogues and enabling remote ordering. The method was adopted across the Grand Bazaar and became standard practice.",
+                    "Managed the full Greece client portfolio: relationships, market research, pricing, and negotiations."
+                ],
+                links: {}
+            }
+        ],
+        projects: [
+            {
+                title: "Tilly",
+                type: "Open-source · Solo · In development",
+                stack: "Next.js, TypeScript, Express.js, Supabase, Docker",
+                description: [
+                    "A full-stack open-source web app I designed and built independently to help small businesses track sales, stock, and commissions — solving a problem I observed firsthand running my own business.",
+                    "Sole developer responsible for the full stack: front-end in React/Next.js with TypeScript, back-end API in Express.js, PostgreSQL database via Supabase, containerised with Docker.",
+                    "Live on Vercel with a public GitHub repo, Apache-2.0 licence, and 24 tracked issues."
+                ],
+                links: { "Live site": "https://tilly-dev.vercel.app", "GitHub": "https://github.com/Cetins/tilly" }
+            },
+            {
+                title: "Brush Barbers",
+                type: "Client work · Freelance",
+                stack: "Wix, SEO, Digital Marketing, Photoshop",
+                description: [
+                    "Built the complete website from scratch for a busy Glasgow barbershop — design, content, SEO optimisation, and booking system configuration.",
+                    "Ongoing management: updates, digital marketing campaigns, social media content, and bookkeeping.",
+                    "A real business that depends on the work I do every day."
+                ],
+                links: { "Live site": "https://www.brushbarbers.com" }
+            },
+            {
+                title: "Code BNB",
+                type: "Capstone project · Solo",
+                stack: "React, Java, Spring Boot, SQL (H2), Auth0",
+                description: [
+                    "Full-stack Airbnb-style app with property listings, bookings, and user reviews.",
+                    "Separate REST API backend in Java/Spring Boot and React frontend, connected via RESTful routes.",
+                    "User authentication via Auth0 (Google and email login)."
+                ],
+                links: { "Frontend": "https://github.com/Cetins/bnb-front-end", "Backend": "https://github.com/Cetins/bnb-back-end" }
+            },
+            {
+                title: "Hello World",
+                type: "Group project · CodeClan",
+                stack: "React, MongoDB, Node.js",
+                description: [
+                    "Capital city quiz app with real-time scoreboard, user login, and wrong-answer replay mode.",
+                    "I built the quiz module and an interactive SVG world map with CSS hover animations on the home page."
+                ],
+                links: { "GitHub": "https://github.com/elainag/React_Full_Stack_Group_Project" }
+            },
+            {
+                title: "Sales Tracker",
+                type: "Personal project · Ongoing",
+                stack: "React, Node.js, MongoDB",
+                description: [
+                    "Side project for small businesses to track sales, stock, and employee commissions.",
+                    "The direct predecessor to Tilly — built to explore the problem space and practice React."
+                ],
+                links: { "GitHub": "https://github.com/Cetins/sale-tracker-client" }
+            },
+            {
+                title: "Gymmy",
+                type: "Solo project · CodeClan",
+                stack: "Python, Flask, SQL",
+                description: [
+                    "Full-stack gym membership and course management app. My first project after CodeClan's Python module.",
+                    "CRUD operations for members, courses, and bookings with SQL data modelling via Python classes."
+                ],
+                links: { "GitHub": "https://github.com/Cetins/gymmy" }
+            }
+        ],
+        education: [
+            {
+                institution: "CodeClan",
+                degree: "Professional Software Development — SCQF Level 8",
+                period: "May – Sep 2022",
+                description: "16-week immersive programme. Solo and group projects in Python/Flask, JavaScript/React, Java/Spring, SQL and MongoDB. Agile/Scrum, Git, UI/UX, and project planning."
+            },
+            {
+                institution: "Harvard CS50",
+                degree: "Introduction to Computer Science — Certificate",
+                period: "Aug – Dec 2020",
+                description: "Where I fell in love with programming. Algorithms, data structures, C, Python and SQL. Verified certificate."
+            },
+            {
+                institution: "Istanbul University",
+                degree: "BA Modern Greek Language & Literature",
+                period: "2000 – 2007",
+                description: "Developed strong research, communication, and analytical skills. Maintained language skills through part-time translation work while studying."
+            }
+        ]
+    };
 
-            hamburgerBtn.addEventListener('click', () => {
-                sidebar.classList.toggle('open');
-            });
-            
-            const initialHash = window.location.hash || '#overview';
-            navigateToSection(initialHash);
-            
-            const skillsData = {
-                labels: ['Frontend', 'Backend', 'Databases', 'DevOps', 'UI/UX'],
-                datasets: [{
-                    label: 'Competency',
-                    data: [90, 85, 80, 75, 80],
-                    backgroundColor: 'rgba(30, 64, 175, 0.2)', /* Blue-800 with opacity */
-                    borderColor: 'rgba(30, 64, 175, 1)',
-                    pointBackgroundColor: 'rgba(30, 64, 175, 1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(30, 64, 175, 1)'
-                }]
-            };
+    // Navigation
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections  = document.querySelectorAll('.content-section');
+    const sidebar   = document.getElementById('sidebar');
 
-            const timelineNav = document.getElementById('timeline-nav');
-            const experienceDetails = document.getElementById('experience-details');
-            
-            cvData.experience.forEach((job, index) => {
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    <button data-index="${index}" class="timeline-nav-btn text-left p-4 rounded-lg w-full transition-colors duration-300 border">
-                        <p class="font-bold">${job.role}</p>
-                        <p class="text-sm text-gray-600">${job.company}</p>
-                        <p class="text-xs text-gray-400 mt-1">${job.period}</p>
-                    </button>
-                `;
-                timelineNav.appendChild(li);
-            });
+    const navigate = (hash) => {
+        navLinks.forEach(l => l.classList.toggle('active', l.hash === hash));
+        sections.forEach(s => s.classList.toggle('active', `#${s.id}` === hash));
+        if (window.innerWidth < 768) sidebar.classList.remove('open');
+    };
 
-            const updateExperienceDetails = (index) => {
-                const job = cvData.experience[index];
-                experienceDetails.innerHTML = `
-                    <h3 class="text-xl font-bold">${job.role}</h3>
-                    <p class="text-md text-gray-500 mb-4">${job.company} | ${job.period}</p>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                        ${job.details.map(d => `<li>${d}</li>`).join('')}
-                    </ul>
-                `;
+    navLinks.forEach(l => l.addEventListener('click', e => {
+        e.preventDefault();
+        navigate(e.currentTarget.hash);
+        window.history.pushState(null, null, e.currentTarget.hash);
+    }));
 
-                document.querySelectorAll('.timeline-nav-btn').forEach((btn, i) => {
-                    btn.classList.toggle('bg-[#DBEAFE]', i === index);
-                    btn.classList.toggle('border-gray-200/80', i !== index);
-                     btn.classList.toggle('border-transparent', i === index);
-                });
-            };
+    document.getElementById('hamburger-btn').addEventListener('click', () => sidebar.classList.toggle('open'));
+    navigate(window.location.hash || '#overview');
 
-            timelineNav.addEventListener('click', (e) => {
-                const button = e.target.closest('.timeline-nav-btn');
-                if (button) {
-                    updateExperienceDetails(parseInt(button.dataset.index));
-                }
-            });
+    // Experience timeline
+    const timelineNav = document.getElementById('timeline-nav');
+    const expDetails  = document.getElementById('experience-details');
 
-            updateExperienceDetails(0);
+    data.experience.forEach((job, i) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <button data-index="${i}" class="timeline-btn ${i===0?'active':''}">
+                <p class="role-name" style="font-weight:600;font-size:14px;${i===0?'color:var(--amber)':''}">${job.role}</p>
+                <p style="font-size:13px;color:var(--muted);margin-top:2px">${job.company}</p>
+                <p style="font-size:12px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace">${job.period}</p>
+            </button>`;
+        timelineNav.appendChild(li);
+    });
 
-            const projectsGrid = document.getElementById('projects-grid');
-            cvData.projects.forEach((project, index) => {
-                const div = document.createElement('div');
-                div.className = "bg-white p-6 rounded-xl shadow-sm border border-gray-200/80 flex flex-col";
-                div.innerHTML = `
-                    <h3 class="text-xl font-bold">${project.title}</h3>
-                    <p class="text-sm text-gray-500 mb-2">${project.type}</p>
-                    <p class="text-sm text-gray-600 flex-grow mb-4">${project.description[0].substring(0, 100)}...</p>
-                    <!-- Tech stack now correctly wraps due to flex-wrap and no hard limit -->
-                    <div class="mb-4 flex flex-wrap gap-y-2">
-                        ${project.stack.split(', ').map(tech => `<span class="inline-block bg-gray-100 text-gray-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">${tech}</span>`).join('')}
-                    </div>
-                    <button data-index="${index}" class="open-modal-btn mt-auto text-center w-full bg-[#1E40AF] text-white py-2 px-4 rounded-lg hover:bg-opacity-90 transition-colors">View Details</button>
-                `;
-                projectsGrid.appendChild(div);
-            });
-            
-            const educationList = document.getElementById('education-list');
-            cvData.education.forEach(edu => {
-                const div = document.createElement('div');
-                div.className = "bg-white p-6 rounded-xl shadow-sm border border-gray-200/80";
-                div.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="text-xl font-bold">${edu.institution}</h3>
-                            <p class="text-md text-[#1E40AF] font-semibold">${edu.degree}</p>
-                        </div>
-                        <p class="text-sm text-gray-500 flex-shrink-0 ml-4">${edu.period}</p>
-                    </div>
-                    <p class="mt-4 text-gray-600">${edu.description}</p>
-                `;
-                educationList.appendChild(div);
-            });
-            
-            const modal = document.getElementById('project-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalStack = document.getElementById('modal-stack');
-            const modalBody = document.getElementById('modal-body');
-            const modalFooter = document.getElementById('modal-footer');
-            const modalCloseBtn = document.getElementById('modal-close-btn');
-
-            const openModal = (index) => {
-                const project = cvData.projects[index];
-                modalTitle.textContent = project.title;
-                modalStack.textContent = project.stack;
-                modalBody.innerHTML = `<ul class="list-disc pl-5 space-y-2 text-gray-700">${project.description.map(d => `<li>${d}</li>`).join('')}</ul>`;
-                
-                modalFooter.innerHTML = '';
-                
-                const linkMap = {
-                    github: "GitHub Repo",
-                    frontend: "Frontend Repo",
-                    backend: "Backend Repo",
-                    development: "Development Website",
-                    live: "Live Website"
-                };
-
-                let hasLinks = false;
-                for (const key in project.links) {
-                    const url = project.links[key];
-                    const text = linkMap[key] || key.charAt(0).toUpperCase() + key.slice(1);
-                    
-                    const isPrimaryButton = (key === 'demo' || key === 'live');
-                    const linkClass = isPrimaryButton 
-                        ? "bg-[#1E40AF] text-white py-2 px-4 rounded-lg hover:bg-opacity-90 transition-colors" 
-                        : "text-sm font-medium text-gray-600 hover:text-[#1E40AF]";
-                    
-                    if (url) {
-                        modalFooter.innerHTML += `<a href="${url}" target="_blank" class="${linkClass}">${text}</a>`;
-                        hasLinks = true;
-                    }
-                }
-                
-                // NEW: Add a friendly message if no links were rendered
-                if (!hasLinks) {
-                     modalFooter.innerHTML = `<p class="text-sm text-gray-500 italic">This project is in active development, and public links are currently unavailable.</p>`;
-                     modalFooter.classList.remove('justify-end'); // Align message to start
-                     modalFooter.classList.add('justify-start');
-                } else {
-                     modalFooter.classList.remove('justify-start'); // Align buttons to end
-                     modalFooter.classList.add('justify-end');
-                }
-
-
-                modal.classList.remove('hidden');
-                setTimeout(() => {
-                    modal.classList.remove('opacity-0');
-                    modal.querySelector('.modal-content').classList.remove('scale-95');
-                }, 10);
-            };
-
-            const closeModal = () => {
-                modal.classList.add('opacity-0');
-                modal.querySelector('.modal-content').classList.add('scale-95');
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                }, 300);
-            };
-
-            projectsGrid.addEventListener('click', (e) => {
-                const button = e.target.closest('.open-modal-btn');
-                if (button) {
-                    openModal(parseInt(button.dataset.index));
-                }
-            });
-
-            modalCloseBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-
+    const showExp = (i) => {
+        const job = data.experience[i];
+        const linksHtml = Object.entries(job.links).map(([label, url]) =>
+            `<a href="${url}" target="_blank" class="btn-ghost" style="font-size:12px">${label} ↗</a>`
+        ).join('');
+        expDetails.innerHTML = `
+            <h3 style="font-size:18px;font-weight:600;margin-bottom:4px">${job.role}</h3>
+            <p style="font-size:14px;color:var(--amber);margin-bottom:16px">${job.company} · <span style="color:var(--muted);font-family:'DM Mono',monospace;font-size:13px">${job.period}</span></p>
+            <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px">
+                ${job.details.map(d => `<li style="display:flex;gap:10px;font-size:14px;color:var(--text);line-height:1.7"><span style="color:var(--amber);flex-shrink:0;margin-top:2px">▸</span><span>${d}</span></li>`).join('')}
+            </ul>
+            ${linksHtml ? `<div style="display:flex;gap:8px;margin-top:20px;flex-wrap:wrap">${linksHtml}</div>` : ''}`;
+        document.querySelectorAll('.timeline-btn').forEach((btn, j) => {
+            btn.classList.toggle('active', j === i);
+            btn.querySelector('.role-name').style.color = j === i ? 'var(--amber)' : 'var(--text)';
         });
-    </script>
+    };
+
+    timelineNav.addEventListener('click', e => {
+        const btn = e.target.closest('.timeline-btn');
+        if (btn) showExp(parseInt(btn.dataset.index));
+    });
+    showExp(0);
+
+    // Projects grid
+    const projectsGrid = document.getElementById('projects-grid');
+    data.projects.forEach((p, i) => {
+        const div = document.createElement('div');
+        div.className = 'project-card';
+        div.innerHTML = `
+            <p style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--amber);margin-bottom:6px">${p.type}</p>
+            <h3 style="font-size:18px;font-weight:600;margin-bottom:8px">${p.title}</h3>
+            <p style="font-size:13px;color:var(--muted);line-height:1.6;flex-grow:1;margin-bottom:16px">${p.description[0].substring(0, 110)}…</p>
+            <div style="margin-bottom:16px;display:flex;flex-wrap:wrap;gap:4px">
+                ${p.stack.split(', ').map(t => `<span class="skill-tag">${t}</span>`).join('')}
+            </div>
+            <button data-index="${i}" class="open-modal-btn btn-primary" style="text-align:center;width:100%;cursor:pointer;border:none">View details</button>`;
+        projectsGrid.appendChild(div);
+    });
+
+    // Education
+    const eduList = document.getElementById('education-list');
+    data.education.forEach(e => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.innerHTML = `
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+                <div>
+                    <h3 style="font-size:17px;font-weight:600">${e.institution}</h3>
+                    <p style="color:var(--amber);font-size:14px;margin-top:2px">${e.degree}</p>
+                </div>
+                <p style="font-size:12px;font-family:'DM Mono',monospace;color:var(--muted);flex-shrink:0">${e.period}</p>
+            </div>
+            <p style="margin-top:12px;font-size:14px;color:var(--muted);line-height:1.7">${e.description}</p>`;
+        eduList.appendChild(div);
+    });
+
+    // Modal
+    const modal      = document.getElementById('project-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalStack = document.getElementById('modal-stack');
+    const modalBody  = document.getElementById('modal-body');
+    const modalFoot  = document.getElementById('modal-footer');
+
+    const openModal = (i) => {
+        const p = data.projects[i];
+        modalTitle.textContent = p.title;
+        modalStack.textContent = p.stack;
+        modalBody.innerHTML = `<ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:12px">
+            ${p.description.map(d => `<li style="display:flex;gap:10px;font-size:14px;color:var(--text);line-height:1.7"><span style="color:var(--amber);flex-shrink:0;margin-top:2px">▸</span><span>${d}</span></li>`).join('')}
+        </ul>`;
+        modalFoot.innerHTML = Object.entries(p.links).map(([label, url]) =>
+            label === 'Live site'
+                ? `<a href="${url}" target="_blank" class="btn-primary">${label} ↗</a>`
+                : `<a href="${url}" target="_blank" class="btn-ghost">${label} ↗</a>`
+        ).join('') || `<p style="font-size:13px;color:var(--muted);font-style:italic">Links coming soon — project in active development.</p>`;
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            modal.querySelector('.modal-content').classList.remove('scale-95');
+        }, 10);
+    };
+
+    const closeModal = () => {
+        modal.classList.add('opacity-0');
+        modal.querySelector('.modal-content').classList.add('scale-95');
+        setTimeout(() => modal.classList.add('hidden'), 250);
+    };
+
+    projectsGrid.addEventListener('click', e => {
+        const btn = e.target.closest('.open-modal-btn');
+        if (btn) openModal(parseInt(btn.dataset.index));
+    });
+    document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+});
+</script>
 </body>
 </html>
